@@ -1,37 +1,28 @@
-
 /// <reference types="cypress" />
 
-import { Given, When } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 import LoginPage from "../pages/login.page.js"
 
-Given('je visite le lien {string}', (s) => {
-    cy.visit("https://www.saucedemo.com/")
+Given('je visite le lien {string}', (url) => {
+    cy.visit(url)
+})
+
+When('je saisi username dans le champs username {string}', (username) => {
+    LoginPage.setUsername(username)
+})
+
+When('je saisi password dans le champs Password {string}', (password) => {
+    LoginPage.setPassword(password)
 })
 
 Then('je click sur le bouton login', () => {
-    LoginPage.clickButtonLogin();
+    LoginPage.clickButtonLogin()
 })
 
-When('je saisi password dans le champs Password {string}', (s) => {
-   LoginPage.setPassword("secret_sauce")
+Then('je suis redirige vers la page Dashboard {string}', (expectedUrl) => {
+    cy.url().should('eq', expectedUrl)
 })
 
-When('je saisi username dans le champs username {string}', (s) => {
-  LoginPage.setUsername("standard_user")
+Then('le message derreur saffiche {string}', (errorMessage) => {
+    LoginPage.isDisplayedError(errorMessage)
 })
-
-Then('je suis redirige vers la page Dashboard {string}', (s) => {
-  cy.url().should('eq', 'https://www.saucedemo.com/inventory.html')
-})
-
-Then('le message derreur saffiche {string}', (s) => {
-   LoginPage.isDisplayedError();
-})
-
-
-
-
-
-
-
-
