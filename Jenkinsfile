@@ -30,7 +30,7 @@ pipeline {
                 }
             }
             archiveArtifacts artifacts: 'cypress/screenshots/**, reports/**/*.*', allowEmptyArchive: true
-            cucumber 'cypress/reports/cucumber-json/*.json'
+            cucumber 'cypress/cucumber-json/*.json'
         }
     }
 }
